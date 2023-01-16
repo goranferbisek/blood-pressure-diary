@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+war {
+    archiveFileName = 'bpdiary.war'
+}
+
+group 'si.ferbisek'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    targetCompatibility = '11'
+    sourceCompatibility = '11'
+}
+
+dependencies {
+    compileOnly('jakarta.platform:jakarta.jakartaee-api:10.0.0')
+}
+
