@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:h="jakarta.faces.html">
+<html xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
 
 <h:head>
     <title>Blood Pressure Diary</title>
@@ -7,6 +8,24 @@
 
 <h:body>
     <h1>Blood Pressure Diary</h1>
+    <h:dataTable value="#{bpDiary.diaries}" var="diary">
+        <h:column>
+            <f:facet name="header">Date</f:facet>
+            <h:outputText value="#{diary.date}" />
+        </h:column>
+    <h:column>
+            <f:facet name="header">Systolic pressure</f:facet>
+            <h:outputText value="#{diary.systolic}" />
+        </h:column>
+    <h:column>
+            <f:facet name="header">Diastolic pressure</f:facet>
+            <h:outputText value="#{diary.diastolic}" />
+        </h:column>
+    <h:column>
+            <f:facet name="header">Note</f:facet>
+            <h:outputText value="#{diary.note}" />
+        </h:column>
+    </h:dataTable>
 </h:body>
 
 </html>
