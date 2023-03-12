@@ -4,16 +4,29 @@ import java.time.LocalDate;
 
 public class DiaryEntry {
 
+    private long id;
     private LocalDate date;
     private int systolic;
     private int diastolic;
     private String note;
 
-    public DiaryEntry(LocalDate date, int systolic, int diastolic, String note) {
+    public DiaryEntry() {
+    }
+
+    public DiaryEntry(long id, LocalDate date, int systolic, int diastolic, String note) {
+        this.id = id;
         this.date = date;
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.note = note;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
