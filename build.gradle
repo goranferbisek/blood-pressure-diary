@@ -20,6 +20,6 @@ compileJava {
 }
 
 dependencies {
-    compileOnly 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+    implementation 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+    implementation 'org.primefaces:primefaces:13.0.4:jakarta'
 }
-

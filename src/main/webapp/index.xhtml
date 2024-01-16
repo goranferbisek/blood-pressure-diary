@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+    <h:head>
+        <title>Blood Pressure Diary</title>
+    </h:head>
+    <h:body>
+        <h1>Blood Pressure Diary</h1>
+
+        <h:form>
+            <div class="grid ui-fluid">
+                <p:outputLabel for="systolic" value="Systolic" />
+                <p:inputText id="systolic" required="true" value="#{bpDiary.diaryEntry.systolic}" placeholder="Systolic pressure">
+                    <f:convertNumber type="number"/>
+                    <f:validateLongRange minimum="30" maximum="300" />
+                </p:inputText>
+
+                <p:outputLabel for="diastolic" value="Diastolic" />
+                <p:inputText id="diastolic" required="true" value="#{bpDiary.diaryEntry.diastolic}" placeholder="Diastolic pressure">
+                    <f:converter converterId="jakarta.faces.Integer" />
+                    <f:validateLongRange minimum="30" maximum="300" />
+                </p:inputText>
+
+                <p:outputLabel for="note" value="Note" />
+                <p:inputText id="note" value="#{bpDiary.diaryEntry.note}" />
+            </div>
+
+            <p:commandButton value="Submit" action="${bpDiary.add()}" update="diaryTable" />
+        </h:form>
+
+        <p:dataTable id="diaryTable" var="measurement" value="#{bpDiary.diaries}" size="small">
+            <p:column headerText="Date">
+                <h:outputText value="#{measurement.date}">
+                    <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Systolic">
+                <h:outputText value="#{measurement.systolic}"/>
+            </p:column>
+            <p:column headerText="Diastolic">
+                <h:outputText value="#{measurement.diastolic}"/>
+            </p:column>
+            <p:column headerText="Note">
+                <h:outputText value="#{measurement.note}"/>
+            </p:column>
+        </p:dataTable>
+    </h:body>
+</f:view>
+
+</html>

@@ -17,6 +17,7 @@ public class DiaryService {
     @PostConstruct
     public void init() {
         diaries.add(new DiaryEntry(diaryId++, LocalDate.now(), 127, 87, "Pressure is OK."));
+        diaries.add(new DiaryEntry(diaryId++, LocalDate.of(2022,5,8), 127, 87, "Pressure is OK."));
         diaries.add(new DiaryEntry(diaryId++, LocalDate.of(2023,1,4), 147, 99, "Very high blood pressure!"));
         diaries.add(new DiaryEntry(diaryId++, LocalDate.of(2022,12,24), 135, 95, "Pressure is a little high."));
     }
