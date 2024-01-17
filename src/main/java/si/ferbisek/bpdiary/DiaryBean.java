@@ -8,9 +8,12 @@ import jakarta.inject.Named;
 import java.time.LocalDate;
 import java.util.List;
 
-@Named("bpDiary") @RequestScoped
-public class BPDiary {
+@Named("diaryBean") @RequestScoped
+public class DiaryBean {
 
+    private Integer systolic;
+    private Integer diastolic;
+    private String note;
     private List<DiaryEntry> diaries;
 
     @Inject
@@ -22,6 +25,30 @@ public class BPDiary {
     private void init() {
         diaries = diaryService.list();
         diaryEntry = new DiaryEntry();
+    }
+
+    public Integer getSystolic() {
+        return systolic;
+    }
+
+    public void setSystolic(Integer systolic) {
+        this.systolic = systolic;
+    }
+
+    public Integer getDiastolic() {
+        return diastolic;
+    }
+
+    public void setDiastolic(Integer diastolic) {
+        this.diastolic = diastolic;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public List<DiaryEntry> getDiaries() {
@@ -41,11 +68,19 @@ public class BPDiary {
     }
 
     public void add() {
-//        diaries.add(diaryEntry);
-        diaryEntry.setDate(LocalDate.now());
-        diaryService.create(diaryEntry);
         diaryEntry = new DiaryEntry();
+        diaryEntry.setDate(LocalDate.now());
+        diaryEntry.setSystolic(systolic);
+        diaryEntry.setDiastolic(diastolic);
+        diaryEntry.setNote(note);
+        diaryService.create(diaryEntry);
+        resetForm();
     }
 
+    private void resetForm() {
+        systolic = null;
+        diastolic = null;
+        note = null;
+    }
 
 }

@@ -13,28 +13,28 @@
     <h:body>
         <h1>Blood Pressure Diary</h1>
 
-        <h:form>
+        <h:form id="inputForm">
             <div class="grid ui-fluid">
                 <p:outputLabel for="systolic" value="Systolic" />
-                <p:inputText id="systolic" required="true" value="#{bpDiary.diaryEntry.systolic}" placeholder="Systolic pressure">
+                <p:inputText id="systolic" required="true" value="#{diaryBean.systolic}" placeholder="Systolic pressure">
                     <f:convertNumber type="number"/>
                     <f:validateLongRange minimum="30" maximum="300" />
                 </p:inputText>
 
                 <p:outputLabel for="diastolic" value="Diastolic" />
-                <p:inputText id="diastolic" required="true" value="#{bpDiary.diaryEntry.diastolic}" placeholder="Diastolic pressure">
+                <p:inputText id="diastolic" required="true" value="#{diaryBean.diastolic}" placeholder="Diastolic pressure">
                     <f:converter converterId="jakarta.faces.Integer" />
                     <f:validateLongRange minimum="30" maximum="300" />
                 </p:inputText>
 
                 <p:outputLabel for="note" value="Note" />
-                <p:inputText id="note" value="#{bpDiary.diaryEntry.note}" />
+                <p:inputText id="note" value="#{diaryBean.note}" />
             </div>
 
-            <p:commandButton value="Submit" action="${bpDiary.add()}" update="diaryTable" />
+            <p:commandButton value="Submit" action="${diaryBean.add()}" update="diaryTable inputForm" />
         </h:form>
 
-        <p:dataTable id="diaryTable" var="measurement" value="#{bpDiary.diaries}" size="small">
+        <p:dataTable id="diaryTable" var="measurement" value="#{diaryBean.diaries}" size="small">
             <p:column headerText="Date">
                 <h:outputText value="#{measurement.date}">
                     <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy"/>
