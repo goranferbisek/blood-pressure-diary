@@ -15,6 +15,9 @@
 
         <h:form id="inputForm">
             <div class="grid ui-fluid">
+                <p:messages>
+                    <p:autoUpdate/>
+                </p:messages>
                 <p:outputLabel for="systolic" value="Systolic" />
                 <p:inputText id="systolic" required="true" value="#{diaryBean.systolic}" placeholder="Systolic pressure">
                     <f:convertNumber type="number"/>
@@ -34,7 +37,7 @@
             <p:commandButton value="Submit" action="${diaryBean.add()}" update="diaryTable inputForm" />
         </h:form>
 
-        <p:dataTable id="diaryTable" var="measurement" value="#{diaryBean.diaries}" size="small">
+        <p:dataTable id="diaryTable" var="measurement" value="#{diaryBean.measurementRecords}" size="small">
             <p:column headerText="Date">
                 <h:outputText value="#{measurement.date}">
                     <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy"/>

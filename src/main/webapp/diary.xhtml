@@ -12,11 +12,11 @@
         <h:form>
             <h:panelGrid id="panel" columns="2">
                 <h:outputLabel for="systolic" value="Systolic pressure" />
-                <h:inputText id="systolic" value="#{diaryBean.diaryEntry.systolic}" />
+                <h:inputText id="systolic" value="#{diaryBean.measurementRecord.systolic}" />
                 <h:outputLabel for="diastolic" value="Diatolic pressure" />
-                <h:inputText id="diastolic" value="#{diaryBean.diaryEntry.diastolic}" />
+                <h:inputText id="diastolic" value="#{diaryBean.measurementRecord.diastolic}" />
                 <h:outputLabel for="note" value="Note" />
-                <h:inputText id="note" value="#{diaryBean.diaryEntry.note}" />
+                <h:inputText id="note" value="#{diaryBean.measurementRecord.note}" />
                 <h:commandButton value="Save" action="${diaryBean.add()}">
                     <f:ajax execute="@form" render=":diaryTable @form"/>
                 </h:commandButton>
@@ -24,22 +24,22 @@
             </h:panelGrid>
         </h:form>
     </dialog>
-    <h:dataTable id="diaryTable" value="#{diaryBean.diaries}" var="diary">
+    <h:dataTable id="diaryTable" value="#{diaryBean.measurementRecords}" var="measurement">
         <h:column>
             <f:facet name="header">Date</f:facet>
-            <h:outputText value="#{diary.date}" />
+            <h:outputText value="#{measurement.date}" />
         </h:column>
         <h:column>
             <f:facet name="header">Systolic pressure</f:facet>
-            <h:outputText value="#{diary.systolic}" />
+            <h:outputText value="#{measurement.systolic}" />
         </h:column>
         <h:column>
             <f:facet name="header">Diastolic pressure</f:facet>
-            <h:outputText value="#{diary.diastolic}" />
+            <h:outputText value="#{measurement.diastolic}" />
         </h:column>
         <h:column>
             <f:facet name="header">Note</f:facet>
-            <h:outputText value="#{diary.note}" />
+            <h:outputText value="#{measurement.note}" />
         </h:column>
     </h:dataTable>
 </h:body>

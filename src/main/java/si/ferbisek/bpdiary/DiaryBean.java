@@ -14,17 +14,17 @@ public class DiaryBean {
     private Integer systolic;
     private Integer diastolic;
     private String note;
-    private List<DiaryEntry> diaries;
+    private List<MeasurementRecord> measurementRecords;
 
     @Inject
     private DiaryService diaryService;
 
-    private DiaryEntry diaryEntry;
+    private MeasurementRecord measurementRecord;
 
     @PostConstruct
     private void init() {
-        diaries = diaryService.list();
-        diaryEntry = new DiaryEntry();
+        measurementRecords = diaryService.list();
+        measurementRecord = new MeasurementRecord();
     }
 
     public Integer getSystolic() {
@@ -51,29 +51,29 @@ public class DiaryBean {
         this.note = note;
     }
 
-    public List<DiaryEntry> getDiaries() {
-        return diaries;
+    public List<MeasurementRecord> getMeasurementRecords() {
+        return measurementRecords;
     }
 
-    public void setDiaries(List<DiaryEntry> diaries) {
-        this.diaries = diaries;
+    public void setMeasurementRecords(List<MeasurementRecord> measurementRecords) {
+        this.measurementRecords = measurementRecords;
     }
 
-    public DiaryEntry getDiaryEntry() {
-        return diaryEntry;
+    public MeasurementRecord getMeasurementRecord() {
+        return measurementRecord;
     }
 
-    public void setDiaryEntry(DiaryEntry diaryEntry) {
-        this.diaryEntry = diaryEntry;
+    public void setMeasurementRecord(MeasurementRecord measurementRecord) {
+        this.measurementRecord = measurementRecord;
     }
 
     public void add() {
-        diaryEntry = new DiaryEntry();
-        diaryEntry.setDate(LocalDate.now());
-        diaryEntry.setSystolic(systolic);
-        diaryEntry.setDiastolic(diastolic);
-        diaryEntry.setNote(note);
-        diaryService.create(diaryEntry);
+        measurementRecord = new MeasurementRecord();
+        measurementRecord.setDate(LocalDate.now());
+        measurementRecord.setSystolic(systolic);
+        measurementRecord.setDiastolic(diastolic);
+        measurementRecord.setNote(note);
+        diaryService.create(measurementRecord);
         resetForm();
     }
 

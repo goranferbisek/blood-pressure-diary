@@ -1,31 +1,42 @@
 package si.ferbisek.bpdiary;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
-public class DiaryEntry {
+@Entity
+@Table(name="measurement_record")
+public class MeasurementRecord {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Long id;
+
+    @Column(name="date")
+    @NotNull
     private LocalDate date;
+
+    @Column(name="systolic")
+    @NotNull
     private int systolic;
+
+    @Column(name="diastolic")
+    @NotNull
     private int diastolic;
+
+    @Column(name="note")
     private String note;
 
-    public DiaryEntry() {
+    public MeasurementRecord() {
     }
 
-    public DiaryEntry(long id, LocalDate date, int systolic, int diastolic, String note) {
-        this.id = id;
-        this.date = date;
-        this.systolic = systolic;
-        this.diastolic = diastolic;
-        this.note = note;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
