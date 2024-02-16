@@ -6,11 +6,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
-public class DiaryService {
+public class MeasurementService {
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -8,8 +8,8 @@ import jakarta.inject.Named;
 import java.time.LocalDate;
 import java.util.List;
 
-@Named("diaryBean") @RequestScoped
-public class DiaryBean {
+@Named("measurementBean") @RequestScoped
+public class MeasurementBean {
 
     private Integer systolic;
     private Integer diastolic;
@@ -17,13 +17,13 @@ public class DiaryBean {
     private List<MeasurementRecord> measurementRecords;
 
     @Inject
-    private DiaryService diaryService;
+    private MeasurementService measurementService;
 
     private MeasurementRecord measurementRecord;
 
     @PostConstruct
     private void init() {
-        measurementRecords = diaryService.list();
+        measurementRecords = measurementService.list();
         measurementRecord = new MeasurementRecord();
     }
 
@@ -73,7 +73,7 @@ public class DiaryBean {
         measurementRecord.setSystolic(systolic);
         measurementRecord.setDiastolic(diastolic);
         measurementRecord.setNote(note);
-        diaryService.create(measurementRecord);
+        measurementService.create(measurementRecord);
         resetForm();
     }
 
