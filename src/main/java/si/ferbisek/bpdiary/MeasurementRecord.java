@@ -14,15 +14,15 @@ public class MeasurementRecord {
     @Column(name="id")
     private Long id;
 
-    @Column(name="date")
+    @Column(name="date", nullable = false)
     @NotNull
     private LocalDate date;
 
-    @Column(name="systolic")
+    @Column(name="systolic", nullable = false)
     @NotNull
     private int systolic;
 
-    @Column(name="diastolic")
+    @Column(name="diastolic", nullable = false)
     @NotNull
     private int diastolic;
 
