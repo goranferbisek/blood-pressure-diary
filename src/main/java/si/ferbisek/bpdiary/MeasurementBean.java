@@ -1,15 +1,16 @@
 package si.ferbisek.bpdiary;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Named("measurementBean") @RequestScoped
-public class MeasurementBean {
+@Named("measurementBean") @ViewScoped
+public class MeasurementBean implements Serializable {
 
     private Integer systolic;
     private Integer diastolic;
@@ -19,12 +20,9 @@ public class MeasurementBean {
     @Inject
     private MeasurementService measurementService;
 
-    private MeasurementRecord measurementRecord;
-
     @PostConstruct
     private void init() {
         measurementRecords = measurementService.list();
-        measurementRecord = new MeasurementRecord();
     }
 
     public Integer getSystolic() {
@@ -59,21 +57,14 @@ public class MeasurementBean {
         this.measurementRecords = measurementRecords;
     }
 
-    public MeasurementRecord getMeasurementRecord() {
-        return measurementRecord;
-    }
-
-    public void setMeasurementRecord(MeasurementRecord measurementRecord) {
-        this.measurementRecord = measurementRecord;
-    }
-
     public void add() {
-        measurementRecord = new MeasurementRecord();
+        MeasurementRecord measurementRecord = new MeasurementRecord();
         measurementRecord.setDate(LocalDate.now());
         measurementRecord.setSystolic(systolic);
         measurementRecord.setDiastolic(diastolic);
         measurementRecord.setNote(note);
         measurementService.create(measurementRecord);
+        measurementRecords.add(measurementRecord);
         resetForm();
     }
 

@@ -13,7 +13,7 @@
     <h:body>
         <h1>Blood Pressure Diary</h1>
 
-        <h:form id="inputForm">
+        <h:form id="measurementForm">
             <div class="grid ui-fluid">
                 <p:messages>
                     <p:autoUpdate/>
@@ -34,10 +34,10 @@
                 <p:inputText id="note" value="#{measurementBean.note}" />
             </div>
 
-            <p:commandButton value="Submit" action="${measurementBean.add()}" update="diaryTable inputForm" />
+            <p:commandButton value="Submit" action="${measurementBean.add()}" update="measurementForm measurementTable" />
         </h:form>
 
-        <p:dataTable id="diaryTable" var="measurement" value="#{measurementBean.measurementRecords}" size="small">
+        <p:dataTable id="measurementTable" var="measurement" value="#{measurementBean.measurementRecords}" size="small">
             <p:column headerText="Date">
                 <h:outputText value="#{measurement.date}">
                     <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy"/>
