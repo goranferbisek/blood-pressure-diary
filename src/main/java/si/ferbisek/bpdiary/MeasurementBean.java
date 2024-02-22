@@ -68,6 +68,11 @@ public class MeasurementBean implements Serializable {
         resetForm();
     }
 
+    public void remove(MeasurementRecord measurementRecord) {
+        measurementService.delete(measurementRecord);
+        measurementRecords.remove(measurementRecord);
+    }
+
     private void resetForm() {
         systolic = null;
         diastolic = null;

@@ -40,4 +40,14 @@ public class MeasurementService {
         entityManager.persist(measurementRecord);
     }
 
+    public void delete(MeasurementRecord measurementRecord) {
+        if (entityManager.contains(measurementRecord)) {
+            entityManager.remove(measurementRecord);
+        } else {
+            MeasurementRecord managedRecord = entityManager.find(MeasurementRecord.class, measurementRecord.getId());
+            if (managedRecord != null) {
+                entityManager.remove(managedRecord);
+            }
+        }
+    }
 }

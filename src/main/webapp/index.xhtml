@@ -34,25 +34,30 @@
                 <p:inputText id="note" value="#{measurementBean.note}" />
             </div>
 
-            <p:commandButton value="Submit" action="${measurementBean.add()}" update="measurementForm measurementTable" />
+            <p:commandButton value="Submit" action="${measurementBean.add()}" update="measurementForm :deleteForm:measurementTable" />
         </h:form>
 
-        <p:dataTable id="measurementTable" var="measurement" value="#{measurementBean.measurementRecords}" size="small">
-            <p:column headerText="Date">
-                <h:outputText value="#{measurement.date}">
-                    <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy"/>
-                </h:outputText>
-            </p:column>
-            <p:column headerText="Systolic">
-                <h:outputText value="#{measurement.systolic}"/>
-            </p:column>
-            <p:column headerText="Diastolic">
-                <h:outputText value="#{measurement.diastolic}"/>
-            </p:column>
-            <p:column headerText="Note">
-                <h:outputText value="#{measurement.note}"/>
-            </p:column>
-        </p:dataTable>
+        <h:form id="deleteForm">
+            <p:dataTable id="measurementTable" var="measurement" value="#{measurementBean.measurementRecords}" size="small">
+                <p:column headerText="Date">
+                    <h:outputText value="#{measurement.date}">
+                        <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Systolic">
+                    <h:outputText value="#{measurement.systolic}"/>
+                </p:column>
+                <p:column headerText="Diastolic">
+                    <h:outputText value="#{measurement.diastolic}"/>
+                </p:column>
+                <p:column headerText="Note">
+                    <h:outputText value="#{measurement.note}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Delete" action="${measurementBean.remove(measurement)}" update="measurementTable"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </h:body>
 </f:view>
 
