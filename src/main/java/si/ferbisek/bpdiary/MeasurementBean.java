@@ -1,9 +1,11 @@
 package si.ferbisek.bpdiary;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -58,14 +60,19 @@ public class MeasurementBean implements Serializable {
     }
 
     public void add() {
-        MeasurementRecord measurementRecord = new MeasurementRecord();
-        measurementRecord.setDate(LocalDate.now());
-        measurementRecord.setSystolic(systolic);
-        measurementRecord.setDiastolic(diastolic);
-        measurementRecord.setNote(note);
-        measurementService.create(measurementRecord);
-        measurementRecords.add(measurementRecord);
-        resetForm();
+        if (!FacesContext.getCurrentInstance().isValidationFailed()) {
+            PrimeFaces.current().executeScript("PF('addEditDialog').hide()");
+
+            MeasurementRecord measurementRecord = new MeasurementRecord();
+            measurementRecord.setDate(LocalDate.now());
+            measurementRecord.setSystolic(systolic);
+            measurementRecord.setDiastolic(diastolic);
+            measurementRecord.setNote(note);
+            measurementService.create(measurementRecord);
+            measurementRecords.add(measurementRecord);
+
+            resetForm();
+        }
     }
 
     public void remove(MeasurementRecord measurementRecord) {
@@ -73,7 +80,7 @@ public class MeasurementBean implements Serializable {
         measurementRecords.remove(measurementRecord);
     }
 
-    private void resetForm() {
+    public void resetForm() {
         systolic = null;
         diastolic = null;
         note = null;

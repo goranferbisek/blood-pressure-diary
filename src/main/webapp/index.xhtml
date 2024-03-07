@@ -13,29 +13,34 @@
     <h:body>
         <h1>Blood Pressure Diary</h1>
 
-        <h:form id="measurementForm">
-            <div class="grid ui-fluid">
-                <p:messages>
-                    <p:autoUpdate/>
-                </p:messages>
-                <p:outputLabel for="systolic" value="Systolic" />
-                <p:inputText id="systolic" required="true" value="#{measurementBean.systolic}" placeholder="Systolic pressure">
-                    <f:convertNumber type="number"/>
-                    <f:validateLongRange minimum="30" maximum="300" />
-                </p:inputText>
+        <p:commandButton value="New" type="button" icon="pi pi-external-link" onclick="PF('addEditDialog').show()"/>
 
-                <p:outputLabel for="diastolic" value="Diastolic" />
-                <p:inputText id="diastolic" required="true" value="#{measurementBean.diastolic}" placeholder="Diastolic pressure">
-                    <f:converter converterId="jakarta.faces.Integer" />
-                    <f:validateLongRange minimum="30" maximum="300" />
-                </p:inputText>
+        <p:dialog widgetVar="addEditDialog">
+            <h:form id="measurementForm">
+                <div class="grid ui-fluid">
+                    <p:messages>
+                        <p:autoUpdate/>
+                    </p:messages>
+                    <p:outputLabel for="systolic" value="Systolic" />
+                    <p:inputText id="systolic" required="true" value="#{measurementBean.systolic}" placeholder="Systolic pressure">
+                        <f:convertNumber type="number"/>
+                        <f:validateLongRange minimum="30" maximum="300" />
+                    </p:inputText>
 
-                <p:outputLabel for="note" value="Note" />
-                <p:inputText id="note" value="#{measurementBean.note}" />
-            </div>
+                    <p:outputLabel for="diastolic" value="Diastolic" />
+                    <p:inputText id="diastolic" required="true" value="#{measurementBean.diastolic}" placeholder="Diastolic pressure">
+                        <f:converter converterId="jakarta.faces.Integer" />
+                        <f:validateLongRange minimum="30" maximum="300" />
+                    </p:inputText>
 
-            <p:commandButton value="Submit" action="${measurementBean.add()}" update="measurementForm :deleteForm:measurementTable" />
-        </h:form>
+                    <p:outputLabel for="note" value="Note" />
+                    <p:inputText id="note" value="#{measurementBean.note}" />
+                </div>
+
+                <p:commandButton value="Submit" actionListener="${measurementBean.add()}" update="measurementForm :deleteForm:measurementTable" />
+                <p:commandButton value="Cancel" type="button" actionListener="${measurementBean.resetForm()}" oncomplete="PF('addEditDialog').hide()"/>
+            </h:form>
+        </p:dialog>
 
         <h:form id="deleteForm">
             <p:dataTable id="measurementTable" var="measurement" value="#{measurementBean.measurementRecords}" size="small">
@@ -58,6 +63,7 @@
                 </p:column>
             </p:dataTable>
         </h:form>
+
     </h:body>
 </f:view>
 
