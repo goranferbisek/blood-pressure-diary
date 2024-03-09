@@ -38,7 +38,9 @@
                 </div>
 
                 <p:commandButton value="Submit" actionListener="${measurementBean.add()}" update="measurementForm :deleteForm:measurementTable" />
-                <p:commandButton value="Cancel" type="button" actionListener="${measurementBean.resetForm()}" oncomplete="PF('addEditDialog').hide()"/>
+                <p:commandButton value="Cancel" oncomplete="PF('addEditDialog').hide();" update=":measurementForm" immediate="true">
+                    <p:resetInput target=":measurementForm" />
+                </p:commandButton>
             </h:form>
         </p:dialog>
 
