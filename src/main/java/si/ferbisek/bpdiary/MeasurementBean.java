@@ -75,6 +75,16 @@ public class MeasurementBean implements Serializable {
         }
     }
 
+    public void get(Long measurementRecordId) {
+        MeasurementRecord measurementRecord = measurementService.read(measurementRecordId);
+        if (measurementRecord != null) {
+            systolic = measurementRecord.getSystolic();
+            diastolic = measurementRecord.getDiastolic();
+            note = measurementRecord.getNote();
+            PrimeFaces.current().executeScript("PF('addEditDialog').show()");
+        }
+    }
+
     public void remove(MeasurementRecord measurementRecord) {
         measurementService.delete(measurementRecord);
         measurementRecords.remove(measurementRecord);
