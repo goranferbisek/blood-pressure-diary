@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <p:outputPanel>
+            <div class="ui-g">
+                <div class="ui-g-4"></div>
+                <div class="ui-g-4">
+
+                    <h1>Login</h1>
+                    <h:form id="login">
+                        <p:messages id="messages" globalOnly="true" />
+                        <h:panelGrid columns="3" cellpadding="3" style="margin: 0 auto">
+                            <p:outputLabel for="username" value="Username:" />
+                            <p:inputText id="username" value="#{loginBean.username}" />
+                            <p:message for="username" />
+
+                            <p:outputLabel for="password" value="Password:" />
+                            <p:inputText id="password" value="#{loginBean.password}" type="password" />
+                            <p:message for="password" />
+
+                            <p:commandButton id="submit" update="@form" value="Login" action="#{loginBean.login}" ajax="false" />
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </p:outputPanel>
+    </h:body>
+</f:view>
+</html>
